@@ -4,7 +4,7 @@ import PySimpleGUI as sg
 import openpyxl as op
 #import configparser
 import config
-from openpyxl.styles import Border, Side, PatternFill, Border
+from openpyxl.styles import Side, PatternFill, Border
 
 #config = configparser.ConfigParser()
 #config.read('config.ini')
@@ -23,7 +23,7 @@ layout = [[sg.Text("Data extraction")],
            sg.In(size=(25, 1), enable_events=True, key="-LIST_NAME-")],
           [sg.Button('Ok')] ]
 
-window = sg.Window(title='J-V charasteristics extraction program', layout=layout)
+window = sg.Window(title='J-V characteristics extraction program', layout=layout)
 while True:
     event, values = window.read()
     if event == 'Ok' or event == sg.WIN_CLOSED:
