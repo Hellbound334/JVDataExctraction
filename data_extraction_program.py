@@ -59,6 +59,15 @@ sheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=3)
 sample_num_cell = sheet.cell(row=1, column=1)
 sample_num_cell.value = 'Sample'
 
+vmax_cell = sheet.cell(row=1, column=4)
+vmax_cell.value = 'Vmax, V'
+
+imax_cell = sheet.cell(row=1, column=5)
+imax_cell.value = 'Imax, mA'
+
+pmax_cell = sheet.cell(row=1, column=6)
+pmax_cell.value = 'Pmax, mW'
+
 voc_cell= sheet.cell(row=1, column=7)
 voc_cell.value =  'Voc, V'
 
@@ -74,6 +83,9 @@ ff_cell.value =  'FF, %'
 
 pce_cell= sheet.cell(row=1, column=11)
 pce_cell.value =  'Efficiency, %'
+
+r_cell = sheet.cell(row=1, column=12)
+r_cell.value = 'R, mOhm'
 
 area_cell= sheet.cell(row=1, column=13)
 area_cell.value =  'Area, cm2'

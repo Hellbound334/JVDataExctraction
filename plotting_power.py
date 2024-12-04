@@ -1,7 +1,6 @@
 import sys
 import PySimpleGUI as sg
-import openpyxl as op
-import os as os
+
 
 layout = [[sg.Text("Enter the following")],
           [sg.Text("Data files folder"),
@@ -45,17 +44,7 @@ if not sheet_name_exists:
 
 sheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=3)
 
-pmax_cell = sheet.cell(row=1, column=6)
-pmax_cell.value = 'Pmax, mW'
 
-vmax_cell = sheet.cell(row=1, column=4)
-vmax_cell.value = 'Vmax, V'
-
-imax_cell = sheet.cell(row=1, column=5)
-imax_cell.value = 'Imax, mA'
-
-r_cell = sheet.cell(row=1, column=12)
-r_cell.value = 'R, mOhm'
 
 row_num = 2
 count = 0

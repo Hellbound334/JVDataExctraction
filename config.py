@@ -32,6 +32,6 @@ perovskite = ['mapi', 'mapbi3',
 
 pathexcel = 'C:\\Users\\v.kalinichenko\\Desktop\\JV\\J-V.xlsx'
 
-def change_excel_path(newPath):
-    global pathexcel
-    pathexcel = newPath
+#def change_excel_path(newPath):
+ #   global pathexcel
+  #  pathexcel = newPath
