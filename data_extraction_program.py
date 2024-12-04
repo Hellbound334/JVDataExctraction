@@ -27,6 +27,7 @@ window = sg.Window(title='J-V characteristics extraction program', layout=layout
 while True:
     event, values = window.read()
     if event == 'Ok' or event == sg.WIN_CLOSED:
+        window.close()
         break
 
 if values["-FOLDER-"] == 'None' or values["-FOLDER-"] == '':
@@ -164,16 +165,22 @@ for x in dir_list:
                                         fill_type="solid")
 
             ff_cell= sheet.cell(row=row_num, column=10)
-            ff_cell.value =  float(parameters[2])
-            if float(parameters[2]) < 40 or parameters[2] == 'NaN':
+            if str(parameters[2]) == 'NaN':
+                ff_cell.value = parameters[2]
+            elif str(parameters[2]) == 'Inf':
+                ff_cell.value = parameters[2]
+            else:
+                ff_cell.value = float(parameters[2])
+
+            if float(parameters[2]) < 40 or float(parameters[2]) > 100 or parameters[2] == 'NaN' or parameters[2] == 'Inf':
                 ff_cell.fill = PatternFill(start_color="FF0000",
                                            end_color="FF0000",
                                            fill_type="solid")
-            elif float(parameters[2]) > 40 and float(parameters[2]) < 50:
+            elif 40 < float(parameters[2]) < 50:
                 ff_cell.fill = PatternFill(start_color="FFC000",
                                            end_color="FFC000",
                                            fill_type="solid")
-            elif float(parameters[2]) > 50 and float(parameters[2]) < 70:
+            elif 50 < float(parameters[2]) < 70:
                 ff_cell.fill = PatternFill(start_color="FFFF00",
                                            end_color="FFFF00",
                                            fill_type="solid")
@@ -184,11 +191,11 @@ for x in dir_list:
                 pce_cell.fill = PatternFill(start_color="FF0000",
                                            end_color="FF0000",
                                            fill_type="solid")
-            elif float(parameters[3]) > 5 and float(parameters[3]) < 9:
+            elif 5 < float(parameters[3]) < 9:
                 pce_cell.fill = PatternFill(start_color="FFC000",
                                            end_color="FFC000",
                                            fill_type="solid")
-            elif float(parameters[3]) > 9 and float(parameters[3]) < 10:
+            elif 9 < float(parameters[3]) < 10:
                 pce_cell.fill = PatternFill(start_color="FFFF00",
                                            end_color="FFFF00",
                                            fill_type="solid")
@@ -213,6 +220,5 @@ for cell in cell_range:
                           right=bor_style,
                           bottom=bor_style)
 
-config.change_excel_path(file_path)
 wb.move_sheet(sheet_name, offset=-1*len(worksheets))
 wb.save(workbook_path)
