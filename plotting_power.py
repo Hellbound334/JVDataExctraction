@@ -1,11 +1,15 @@
 import sys
+import os
+import config
+import openpyxl as op
 import PySimpleGUI as sg
 
-
-layout = [[sg.Text("Enter the following")],
+layout = [[sg.Text("Power and IV data calculation")],
           [sg.Text("Data files folder"),
            sg.In(size=(25, 1), enable_events=True, key="-FOLDER-"),
            sg.FolderBrowse()],
+          [sg.Text("Choose workbook path"),
+           sg.In(default_text=config.pathexcel, size=(25, 1), enable_events=True, key="-WB_NAME-"), sg.FilesBrowse(file_types=(("Excel file", "*.xlsx"),))],
           [sg.Text("Enter name of the list"),
            sg.In(size=(25, 1), enable_events=True, key="-LIST_NAME-")],
           [sg.Button('Ok')] ]
@@ -14,18 +18,17 @@ window = sg.Window(title='Power calculation', layout=layout)
 while True:
     event, values = window.read()
     if event == 'Ok' or event == sg.WIN_CLOSED:
-        sys.exit()
+        break
 
 if values["-FOLDER-"] == 'None' or values["-FOLDER-"] == '':
     window = sg.Window(title='Error', layout=[[sg.Text('Path is not found, try again')], [sg.Button('Ok')]])
     while True:
         event, values = window.read()
         if event == 'Ok' or event == sg.WIN_CLOSED:
-            break
-    sys.exit()
+            sys.exit()
 
 file_path = str(values["-FOLDER-"])
-workbook_path= 'C:\\Users\\v.kalinichenko\\Desktop\\JV\\J-V.xlsx'
+workbook_path= str(values["-WB_NAME-"])
 wb = op.load_workbook(workbook_path)
 
 worksheets = wb.worksheets
@@ -43,8 +46,6 @@ if not sheet_name_exists:
     sheet = wb.create_sheet(sheet_name)
 
 sheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=3)
-
-
 
 row_num = 2
 count = 0
